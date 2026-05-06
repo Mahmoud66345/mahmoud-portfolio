@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahmoud Alnabawi — Quality Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --card: #1e1e1e;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --text: #f0ede8;
+    --muted: #888;
+    --border: #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+  }
+  .hero-content { max-width: 800px; animation: fadeUp 1s ease forwards; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 2px;
+    margin-bottom: 28px;
+    animation: fadeUp 1s ease 0.1s both;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-subtitle {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 540px; margin-bottom: 48px;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+  .hero-contacts {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    animation: fadeUp 1s ease 0.4s both;
+  }
+  .contact-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 10px 20px; border-radius: 100px;
+    font-size: 0.85rem; color: var(--text);
+    text-decoration: none;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .contact-pill:hover { border-color: var(--gold); color: var(--gold); }
+  .contact-pill .icon { font-size: 1rem; }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; margin-bottom: 60px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 24px;
+  }
+
+  /* SUMMARY */
+  .summary-text {
+    font-size: 1.15rem; line-height: 1.9;
+    color: #ccc; max-width: 760px;
+  }
+
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .timeline-item {
+    padding-left: 40px; margin-bottom: 60px; position: relative;
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute; left: -5px; top: 6px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--gold); border: 2px solid var(--bg);
+  }
+  .timeline-date {
+    font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .timeline-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-weight: 700; margin-bottom: 4px;
+  }
+  .timeline-company {
+    font-size: 0.9rem; color: var(--muted); margin-bottom: 16px;
+  }
+  .timeline-list { list-style: none; }
+  .timeline-list li {
+    font-size: 0.9rem; color: #bbb; padding: 5px 0;
+    padding-left: 16px; position: relative;
+  }
+  .timeline-list li::before {
+    content: '→';
+    position: absolute; left: 0; color: var(--gold); font-size: 0.8rem;
+  }
+
+  /* SKILLS GRID */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+    transition: border-color 0.3s, transform 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s;
+  }
+  .skill-card.visible { opacity: 1; transform: translateY(0); }
+  .skill-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+  .skill-icon { font-size: 1.6rem; margin-bottom: 12px; }
+  .skill-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
+  .skill-desc { font-size: 0.8rem; color: var(--muted); }
+
+  /* CERTIFICATIONS */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+  }
+  .cert-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 6px; padding: 20px 24px;
+    display: flex; align-items: flex-start; gap: 16px;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .cert-item.visible { opacity: 1; transform: translateY(0); }
+  .cert-badge {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(201,168,76,0.12); border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0; color: var(--gold);
+  }
+  .cert-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 3px; }
+  .cert-source { font-size: 0.75rem; color: var(--muted); }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 40px;
+    display: flex; gap: 40px; align-items: flex-start;
+    max-width: 700px;
+  }
+  .edu-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem; color: var(--gold);
+    font-weight: 900; flex-shrink: 0; line-height: 1;
+  }
+  .edu-degree { font-size: 1.2rem; font-weight: 500; margin-bottom: 6px; }
+  .edu-school { font-size: 0.9rem; color: var(--muted); margin-bottom: 12px; }
+  .edu-project { font-size: 0.85rem; color: #aaa; font-style: italic; }
+
+  /* FOOTER */
+  footer {
+    padding: 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--gold);
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--muted); }
+
+  /* SCROLL REVEAL */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    section { padding: 70px 24px; }
+    footer { padding: 40px 24px; }
+    .edu-card { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">M. Alnabawi</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Quality Engineer · Cairo, Egypt</div>
+    <h1>Mahmoud<br><span>Alnabawi</span></h1>
+    <p class="hero-subtitle">Detail-oriented Quality Control professional with 3+ years of experience in manufacturing, laboratory testing, and production inspection. ISO 9001 certified. Lean Six Sigma Black Belt.</p>
+    <div class="hero-contacts">
+      <a class="contact-pill" href="mailto:mahmoudalnabawi61@gmail.com">
+        <span class="icon">✉</span> mahmoudalnabawi61@gmail.com
+      </a>
+      <a class="contact-pill" href="tel:+201027829232">
+        <span class="icon">📞</span> +20 102 782 9232
+      </a>
+      <a class="contact-pill" href="http://www.linkedin.com/in/mahmoud-elnabawi" target="_blank">
+        <span class="icon">💼</span> LinkedIn
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: var(--surface);">
+  <p class="section-label">Profile</p>
+  <h2 class="section-title">Professional Summary</h2>
+  <p class="summary-text">
+    Detail-oriented Quality Control professional with strong experience in manufacturing, laboratory testing, and production inspection within industrial environments. Solid background in ISO 9001 compliance, process monitoring, data reporting, and continuous improvement. Recently expanded expertise into data analysis and sustainability, integrating analytical thinking with quality systems to support data-driven decision-making and operational excellence.
+  </p>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">Career</p>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Jul 2024 – Present</div>
+      <div class="timeline-title">Head of Raw Material & External Testing Department</div>
+      <div class="timeline-company">Oriental Weavers Group (Mac Carpet) — Soft Flooring Industry</div>
+      <ul class="timeline-list">
+        <li>Lead and supervise raw material testing activities to ensure compliance with technical specifications and quality standards</li>
+        <li>Manage external laboratory testing, including sample preparation, coordination, and result evaluation</li>
+        <li>Review and approve test reports from internal and external laboratories</li>
+        <li>Analyze test data and trends to support supplier evaluation and material approval</li>
+        <li>Ensure compliance with ISO 9001 requirements related to material testing and documentation</li>
+        <li>Coordinate with production, procurement, and suppliers to resolve material non-conformities</li>
+        <li>Develop testing procedures and contribute to continuous improvement initiatives</li>
+        <li>Prepare technical reports and communicate results to senior management</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Nov 2022 – Jul 2024</div>
+      <div class="timeline-title">Quality Control Engineer</div>
+      <div class="timeline-company">Extrucoat – Dawlia 21 for Aluminum Extrusion & Coating</div>
+      <ul class="timeline-list">
+        <li>Conducted laboratory and production-line quality control for aluminum extrusion and coating processes</li>
+        <li>Monitored pretreatment and wastewater treatment units; prepared chemicals for titration and analysis</li>
+        <li>Inspected incoming aluminum billets and verified chemical composition according to standards</li>
+        <li>Performed in-process and final inspections of extruded profiles (hot, cooling, stretching, packing)</li>
+        <li>Checked surface appearance, dimensions, hardness (Webster), and curing oven temperatures</li>
+        <li>Recorded inspection results and maintained ISO 9001 quality documentation</li>
+        <li>Reported daily quality results to supervisors and top management</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--surface);">
+  <p class="section-label">Expertise</p>
+  <h2 class="section-title">Core Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🔬</div>
+      <div class="skill-name">Quality Control & Assurance</div>
+      <div class="skill-desc">In-process inspection, final QC, defect detection, corrective actions</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📋</div>
+      <div class="skill-name">ISO 9001 Compliance</div>
+      <div class="skill-desc">Documentation, audit preparation, process monitoring & reporting</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🧪</div>
+      <div class="skill-name">Laboratory Testing</div>
+      <div class="skill-desc">Titration, chemical analysis, material characterization, sample prep</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <div class="skill-name">Data Analysis</div>
+      <div class="skill-desc">Python, Power BI, statistical thinking, data visualization</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔍</div>
+      <div class="skill-name">Root Cause Analysis</div>
+      <div class="skill-desc">Problem-solving, 8D methodology, non-conformity resolution</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌱</div>
+      <div class="skill-name">Sustainability & ESG</div>
+      <div class="skill-desc">Supplier compliance, Sedex, B-Hive, environmental standards</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📝</div>
+      <div class="skill-name">Technical Reporting</div>
+      <div class="skill-desc">Management reports, test documentation, KPI dashboards</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🏭</div>
+      <div class="skill-name">Supplier Evaluation</div>
+      <div class="skill-desc">Material approval, trend analysis, procurement coordination</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-item">
+      <div class="cert-badge">⚡</div>
+      <div>
+        <div class="cert-name">Lean Six Sigma Black Belt</div>
+        <div class="cert-source">Coursera · Jul 2025</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">🟢</div>
+      <div>
+        <div class="cert-name">Lean Six Sigma Green Belt</div>
+        <div class="cert-source">Udemy · Nov 2024</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">🔬</div>
+      <div>
+        <div class="cert-name">ISO/IEC 17025:2017</div>
+        <div class="cert-source">Udemy · Oct 2024</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">✅</div>
+      <div>
+        <div class="cert-name">ISO 9001:2015 Requirements & Implementation</div>
+        <div class="cert-source">Nov 2020</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">🛡</div>
+      <div>
+        <div class="cert-name">NIOSH HSE Specialist</div>
+        <div class="cert-source">Oct 2022</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">⚠️</div>
+      <div>
+        <div class="cert-name">OSHA — General Industry & Construction Safety</div>
+        <div class="cert-source">May 2022</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">🤖</div>
+      <div>
+        <div class="cert-name">IBM Data Science Specialization</div>
+        <div class="cert-source">Coursera · Jul 2025</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">📈</div>
+      <div>
+        <div class="cert-name">Google Advanced Data Analytics</div>
+        <div class="cert-source">Coursera · Aug 2025</div>
+      </div>
+    </div>
+    <div class="cert-item">
+      <div class="cert-badge">🔢</div>
+      <div>
+        <div class="cert-name">Foundations of Data Science</div>
+        <div class="cert-source">Coursera · Sep 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" style="background: var(--surface);">
+  <p class="section-label">Academic</p>
+  <h2 class="section-title">Education</h2>
+  <div class="edu-card">
+    <div class="edu-year">2022</div>
+    <div>
+      <div class="edu-degree">Bachelor of Science in Applied Chemistry</div>
+      <div class="edu-school">Faculty of Science, Al-Azhar University, Cairo · Grade: Very Good</div>
+      <div class="edu-project">Graduation Project: Preparation and characterization of nano BaSO₄ nanoparticles and their application in paints — <strong style="color:var(--gold)">Excellent</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Mahmoud Alnabawi</div>
+  <div class="footer-copy">Quality Control & Assurance Engineer · Cairo, Egypt</div>
+  <a class="contact-pill" href="mailto:mahmoudalnabawi61@gmail.com" style="font-size:0.8rem;">
+    ✉ Get In Touch
+  </a>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.timeline-item, .skill-card, .cert-item').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
