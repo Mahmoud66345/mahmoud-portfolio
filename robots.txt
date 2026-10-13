@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mahmoud66345.github.io/mahmoud-portfolio/sitemap.xml
